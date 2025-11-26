@@ -106,3 +106,55 @@ button:hover {
     color: #ff5b2c;
     text-decoration: none;
 }
+
+/* Responsividade para telas menores (mobile) */
+  
+@media (max-width: 480px) {
+
+    /* Diminuir largura do card no celular */
+    .card {
+        width: 90%;
+        padding: 25px 20px;
+    }
+
+    /* Ícone menor para caber melhor */
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .chef-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    /* Títulos menores */
+    h2 {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    /* Labels e inputs mais compactos */
+    label {
+        margin-top: 15px;
+        font-size: 13px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    /* Botão menor */
+    button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .cadastro {
+        font-size: 13px;
+    }
+}
