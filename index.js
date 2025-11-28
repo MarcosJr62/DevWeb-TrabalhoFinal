@@ -156,10 +156,10 @@ app.get('/api/menu', async (req, res) => {
 
 
 app.post('/api/pedidos', requireAuth, async (req, res) => {
-  const { items, total } = req.body;
+  const { items, total, details } = req.body; 
 
-  if (!items || !total)
-    return res.status(400).json({ error: "Dados incompletos." });
+  if (!items || !total || !details) 
+    return res.status(400).json({ error: "Dados incompletos (itens, total ou detalhes faltando)." });
 
   const { data, error } = await supabase
     .from("pedidos")
@@ -168,7 +168,8 @@ app.post('/api/pedidos', requireAuth, async (req, res) => {
         user_id: req.userId,
         items_json: JSON.stringify(items),
         total,
-        status: "Pendente"
+        status: "Pendente",
+        details_json: JSON.stringify(details) 
       }
     ])
     .select();
@@ -182,25 +183,40 @@ app.post('/api/pedidos', requireAuth, async (req, res) => {
 });
 
 
-app.get('/api/pedidos', requireAuth, async (req, res) => {
+
+app.post('/api/finalizar', requireAuth, async (req, res) => {
+  const { nome, telefone, endereco, pagamento, observacoes, itens, total } = req.body;
+
+  if (!nome || !telefone || !endereco || !pagamento || !itens || !total) {
+    return res.status(400).json({ error: "Dados incompletos." });
+  }
+
   const { data, error } = await supabase
-    .from("pedidos")
-    .select("id, total, status, created_at, items_json")
-    .eq("user_id", req.userId)
-    .order("created_at", { ascending: false });
+    .from("pedidos_finalizados")
+    .insert([{
+        user_id: req.userId,
+        nome,
+        telefone,
+        endereco,
+        pagamento,
+        observacoes,
+        itens_json: JSON.stringify(itens),
+        total
+    }])
+    .select();
 
-  if (error)
-    return res.status(500).json({ error: "Erro ao buscar pedidos." });
+  if (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Erro ao finalizar pedido." });
+  }
 
-  const formatado = data.map(p => ({
-    ...p,
-    items: JSON.parse(p.items_json)
-  }));
-
-  res.status(200).json(formatado);
+  res.status(201).json({
+    message: "Pedido finalizado com sucesso!",
+    pedido: data[0]
+  });
 });
 
-// INICIAR SERVIDOR
+
 app.listen(PORT, () => {
   console.log(`Servidor ativo em http://localhost:${PORT}`);
 });

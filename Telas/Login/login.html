@@ -73,23 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
 
             if (res.ok) {
+
+                localStorage.removeItem("auth_token");
+                localStorage.removeItem("sabor_arte_cart");
+
                 if (!data.token) {
                     mostrarMensagem('Email não confirmado. Verifique sua caixa de entrada.', true);
                     formButton.disabled = false;
                     formButton.textContent = 'Entrar';
                     return;
                 }
-                mostrarMensagem('Login realizado com sucesso!');
+
                 localStorage.setItem('auth_token', data.token);
+
+                mostrarMensagem('Login realizado com sucesso!');
+
                 setTimeout(() => {
                     window.location.href = '../Lista_pratos/lista_pratos.html';
                 }, 1500);
+
             } else {
                 let erroMsg = data.error || 'Email ou senha inválidos.';
                 mostrarMensagem(erroMsg, true);
                 formButton.disabled = false;
                 formButton.textContent = 'Entrar';
             }
+
         } catch (err) {
             console.error('Erro de rede:', err);
             mostrarMensagem('Erro de conexão. Tente novamente.', true);
