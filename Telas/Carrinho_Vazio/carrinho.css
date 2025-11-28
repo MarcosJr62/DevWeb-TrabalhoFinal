@@ -1,0 +1,36 @@
+/* Configuração de Cores e Estilos Customizados */
+:root {
+    --color-primary: #ff7a3d;
+    --color-light-bg: #fdfaf7;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-light-bg);
+}
+
+/* Ícone da marca */
+.icon-brand-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff7a3d, #ff5b2c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
+}
+
+/* Classe para a cor primária (Laranja) */
+.bg-primary-sa { background-color: var(--color-primary); }
+.text-primary-sa { color: var(--color-primary); }
+.border-primary-sa { border-color: var(--color-primary); }
+.hover\:bg-primary-sa-dark:hover { background-color: #e56a31; }
+
+/* Estilo para imagem do item */
+#cart-items-container .item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
