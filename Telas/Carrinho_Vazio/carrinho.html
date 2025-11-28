@@ -101,5 +101,142 @@
     </div>
 </div>
 
+<script>
+/*Utilitários*/
+const DELIVERY_FEE = 10;
+const getCart    = () => JSON.parse(localStorage.getItem("sabor_arte_cart") || "{}");
+const saveCart   = cart => localStorage.setItem("sabor_arte_cart", JSON.stringify(cart));
+const money      = n => n.toLocaleString("pt-BR", {style:"currency",currency:"BRL"});
+
+/*Modal */
+let confirmCallback = null;
+
+function showModal(title, text, onConfirm) {
+    modal.classList.remove("hidden"); modal.classList.add("flex");
+    modalTitle.textContent = title;
+    modalBody.textContent = text;
+    confirmCallback = onConfirm || null;
+    confirmBtn.style.display = onConfirm ? "block" : "none";
+}
+
+function closeModal() {
+    modal.classList.add("hidden"); modal.classList.remove("flex");
+}
+
+function confirmAction() {
+    if (confirmCallback) confirmCallback();
+    closeModal();
+}
+
+/*Renderização do carrinho */
+function renderCart() {
+    const cart = getCart();
+    const items = Object.entries(cart);
+    const container = document.getElementById("cart-items-container");
+    const emptyMsg = document.getElementById("empty-cart-message");
+    const btn = document.getElementById("finalize-order-btn");
+
+    container.innerHTML = "";
+    emptyMsg.classList.toggle("hidden", items.length > 0);
+    btn.disabled = items.length === 0;
+
+    let subtotal = 0;
+
+    items.forEach(([id, item]) => {
+        const total = item.price * item.quantity;
+        subtotal += total;
+
+        container.innerHTML += `
+        <div class="flex justify-between p-4 border rounded-lg bg-white hover:shadow">
+
+            <div class="flex gap-4">
+                <img src="../img/${item.image}"
+                     class="item-image bg-gray-100 border"
+                     onerror="this.src='https://placehold.co/80x80/f3f4f6/374151?text=Prato'">
+
+                <div>
+                    <h3 class="font-semibold">${item.name}</h3>
+                    <p class="text-sm text-gray-500">${money(item.price)} / un.</p>
+                    <p class="text-sm font-bold text-primary-sa">Total: ${money(total)}</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-end gap-2">
+
+                <div class="flex border rounded-lg">
+                    <button onclick="changeQty('${id}', -1)"
+                            class="p-2 hover:bg-gray-100">
+                        <span class="iconify" data-icon="mdi:minus"></span>
+                    </button>
+
+                    <span class="w-10 flex items-center justify-center font-medium text-gray-800">
+                        ${item.quantity}
+                    </span>
+
+                    <button onclick="changeQty('${id}', 1)"
+                            class="p-2 hover:bg-gray-100">
+                        <span class="iconify" data-icon="mdi:plus"></span>
+                    </button>
+                </div>
+
+                <button class="flex items-center gap-1 text-red-500 text-xs font-medium hover:text-red-700"
+                        onclick="removeItem('${id}')">
+                    <span class="iconify mr-1" data-icon="mdi:trash-can-outline"></span>
+                    <span>Remover</span>
+                </button>
+
+            </div>
+
+        </div>`;
+    });
+
+    subtotalEl.textContent = money(subtotal);
+    deliveryFeeEl.textContent = money(DELIVERY_FEE);
+    totalAmountEl.textContent = money(subtotal + DELIVERY_FEE);
+
+    if (window.Iconify) Iconify.scan();
+}
+
+/*Ações */
+function changeQty(id, delta) {
+    const cart = getCart();
+    if (!cart[id]) return;
+
+    cart[id].quantity += delta;
+
+    if (cart[id].quantity <= 0) return removeItem(id);
+
+    saveCart(cart);
+    renderCart();
+}
+
+function removeItem(id) {
+    showModal("Remover Item", "Deseja remover este item?", () => {
+        const cart = getCart();
+        delete cart[id];
+        saveCart(cart);
+        renderCart();
+    });
+}
+
+function finalizeOrder() {
+    const cart = getCart();
+    if (!Object.keys(cart).length) return;
+
+    window.location.href = "../Finalizar_compra/fianlizar_compra.html";
+}
+
+/* Elementos */
+const modal = document.getElementById("confirmation-modal");
+const modalTitle = document.getElementById("modal-title");
+const modalBody = document.getElementById("modal-body-text");
+const confirmBtn = document.getElementById("modal-confirm-btn");
+
+const subtotalEl = document.getElementById("subtotal");
+const deliveryFeeEl = document.getElementById("delivery-fee");
+const totalAmountEl = document.getElementById("total-amount");
+</script>
+
 </body>
 </html>
+
