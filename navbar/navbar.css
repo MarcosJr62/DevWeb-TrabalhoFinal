@@ -6,13 +6,11 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px 15px 10px;
     background: linear-gradient(135deg, #ffaa82, #ff7149dc);
     color: #fff;
-    position: relative; /* permite centralização real */
 }
 
-/* Ícone à esquerda */
 .icon {
     width: 70px;
     height: 70px;
@@ -24,69 +22,53 @@ body {
     box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
 }
 
-/* Ícone do chapéu */
-.chef-icon {
-    width: 42px;
-    height: 42px;
-    color: #ff5b2c;
+.logo {
+    width: 80px;
+    height: 80px;
 }
 
-/* MENU CENTRALIZADO */
 .menu {
     list-style: none;
     display: flex;
-    gap: 20px;
-    position: absolute;
-    left: 48%;
-    transform: translateX(-50%);  /* centraliza 100% */
+    gap: 30px;
+    margin-left: auto;
+    align-items: center;
+    padding-right: 20px;
 }
 
 .menu li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
     color: #fff;
     font-size: 1rem;
-    transition: 0.3s;
     font-weight: bolder;
+    transition: 0.3s;
 }
 
 .menu li a:hover {
     color: #ffcc00;
 }
 
-/* ÍCONE DE PERFIL À DIREITA */
-.profile {
-    margin-left: auto; /* empurra para a direita */
-    display: flex;
-    align-items: center;
+.icon-svg svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
 }
 
-.profile-icon {
-    font-size: 48px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.profile-icon:hover {
-    color: #ffcc00;
-}
-
-
-/* RESPONSIVO */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        position: relative;
         height: auto;
         padding-bottom: 20px;
     }
 
     .menu {
-        position: static;
-        transform: none;
+        margin-left: 0;
+        padding-right: 0;
         flex-direction: column;
         width: 100%;
-        padding: 0;
         margin-top: 10px;
     }
 
