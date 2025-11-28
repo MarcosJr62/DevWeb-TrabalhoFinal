@@ -136,7 +136,7 @@ app.get('/api/menu', async (req, res) => {
   const { data: menu, error } = await supabase
     .from("menu")
     .select("*")
-    .order("category")
+    .order("categoria")
     .order("id");
 
   if (error) {
@@ -144,15 +144,24 @@ app.get('/api/menu', async (req, res) => {
     return res.status(500).json({ error: "Falha ao carregar o cardápio." });
   }
 
+
   const agrupado = menu.reduce((acc, item) => {
-    const cat = item.category || "Outros";
+    const cat = item.categoria || "Outros";
     if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(item);
+    acc[cat].push({
+      id: item.id,
+      categoria: item.categoria,
+      nome_prato: item.nome_prato,
+      descricao: item.descricao,
+      preco: item.preco,
+      imagem: item.imagem
+    });
     return acc;
   }, {});
 
   res.status(200).json(agrupado);
 });
+
 
 
 app.post('/api/pedidos', requireAuth, async (req, res) => {

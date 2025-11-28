@@ -97,21 +97,23 @@
         let summaryHTML = '<h3>Seu Pedido</h3><ul style="list-style-type:none;padding:0;">';
 
         const finalItems = items.map(item => {
-            const itemTotal = item.price * item.quantity;
+            const itemTotal = item.preco * item.quantity;
             subtotal += itemTotal;
 
             summaryHTML += `
                 <li style="margin-bottom:5px;border-bottom:1px dotted #ccc;padding-bottom:5px;">
-                    ${item.quantity}x ${item.name} (${money(item.price)} cada) -
+                    ${item.quantity}x ${item.nome_prato} (${money(item.preco)} cada) -
                     <span style="font-weight:bold;">${money(itemTotal)}</span>
                 </li>`;
 
             return {
                 id: item.id,
-                name: item.name,
-                quantity: item.quantity,
-                price: item.price,
-                total_item: itemTotal
+                nome_prato: item.nome_prato,
+                quantidade: item.quantity,
+                preco: item.preco,
+                total_item: itemTotal,
+                imagem: item.imagem,
+                descricao: item.descricao
             };
         });
 
@@ -148,7 +150,7 @@
             const pagamento = document.querySelector("#pagamento").value;
             const obs = document.querySelector("#obs").value.trim();
             
-            const token = localStorage.getItem("auth_token"); // ← CORRIGIDO
+            const token = localStorage.getItem("auth_token"); 
 
             if (!token) {
                 mostrarMensagem("Sessão expirada. Por favor, faça login novamente.", true);
@@ -209,7 +211,6 @@
         });
     });
 </script>
-
 
 </body>
 </html>
