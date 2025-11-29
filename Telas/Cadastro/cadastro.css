@@ -28,7 +28,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 20px auto;
+
     box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
 }
 
@@ -37,6 +37,23 @@ body {
     width: 42px;
     height: 42px;
     color: white;
+}
+
+.icone {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
 }
 
 /* Título do sistema */
@@ -68,7 +85,7 @@ label {
 
 /* Campos de input */
 input {
-    width: 100%;
+    width: 93%;
     padding: 12px;
     margin-top: 6px;
     border: 1px solid #e2e2e2;
