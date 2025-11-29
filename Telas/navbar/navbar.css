@@ -3,15 +3,21 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
+/* ------------ navbar -------------- */
+
 .navbar {
     display: flex;
     align-items: center;
     padding: 15px 15px 10px;
-    background: linear-gradient(135deg, #ffaa82, #ff7149dc);
+    background: linear-gradient(135deg, #ffe1d4, #fd4714);
     color: #fff;
+    border-bottom-left-radius: 15px ;
+    border-bottom-right-radius: 15px ;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.icon {
+.icone {
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -51,7 +57,7 @@ body {
     color: #ffcc00;
 }
 
-.icon-svg svg {
+.icone-svg svg {
     width: 20px;
     height: 20px;
     fill: #fff;
@@ -79,3 +85,6 @@ body {
         border-top: 1px solid #444;
     }
 }
+
+
+/* ------------ fim navbar -------------- */
