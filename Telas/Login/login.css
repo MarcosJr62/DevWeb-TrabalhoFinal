@@ -55,24 +55,20 @@ input {
     font-size: 14px;
 }
 
-/* Círculo que envolve o ícone */
-.icon {
+.icone {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff7a3d, #ff5b2c);
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 20px auto;
     box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
 }
 
-/* Tamanho e cor do ícone de chapéu */
-.chef-icon {
-    width: 42px;
-    height: 42px;
-    color: white;
+.logo {
+    width: 70px;
+    height: 70px;
 }
 
 /* Título do sistema */

@@ -19,21 +19,21 @@ body {
 }
 
 /* círculo do ícone */
-.icon {
-    width: 80px;
-    height: 80px;
+.icone {
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff7a3d, #ff5b2c);
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 24px auto;
-    box-shadow: 0 8px 18px rgba(255, 120, 60, 0.45);
+    box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
+    padding-right: 15px;
 }
 
-.cart-icon {
-    font-size: 34px;
-    color: #fff;
+.logo {
+    width: 70px;
+    height: 70px;
 }
 
 /* textos */

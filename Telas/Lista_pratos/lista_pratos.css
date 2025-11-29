@@ -37,6 +37,23 @@
     font-size: 28px;
 }
 
+.icone {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
+    padding-right: 15px;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+}
+
 /* --- CARDS DOS PRATOS --- */
 .card-custom {
     border: none;

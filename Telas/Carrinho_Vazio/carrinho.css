@@ -9,6 +9,23 @@ body {
     background-color: var(--color-light-bg);
 }
 
+.icone {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(255, 100, 50, 0.4);
+    
+}
+
+.logo {
+    width: auto;
+    height: 55px;
+}
+
 /* Ícone da marca */
 .icon-brand-small {
     width: 40px;
